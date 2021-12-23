@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, jsonify
 from flask_sqlalchemy import SQLAlchemy
 
 
@@ -55,8 +55,8 @@ def report_expenses():
         return render_template('report.html', all_expenses=all_expenses)
    
 
-    all_expenses = Expense.query.all()
-    return render_template ('report.html', all_expenses=all_expenses)
+    all_expenses = Expense.query.all() 
+    return render_template ('report.html' , all_expenses=all_expenses)
 
 
 
@@ -73,9 +73,6 @@ def update_expenses(sno):
         db.session.commit()
 
         return redirect ('/report')
-        
-    
-
     
     expense = Expense.query.filter_by(id=sno).first()
     return render_template ('update.html', expense=expense)
@@ -94,4 +91,4 @@ def delete_expenses(sno):
 
 
 if __name__=='__main__':
-    app.run(debug= True)
+    app.run(debug= True )
